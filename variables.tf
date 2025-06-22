@@ -1,8 +1,3 @@
-variable "subscription_id" {
-  description = "(Required) The Subscription ID."
-  type        = string
-}
-
 variable "location" {
   description = "(Required) The location of the Azure resources (e.g. westeurope)."
   type        = string
@@ -41,12 +36,6 @@ variable "vm_admin_username" {
 variable "vm_admin_password" {
   description = "(Required) The administrator password for the Azure Virtual Machine."
   type        = string
-}
-
-variable "allowed_public_ip_address_ranges" {
-  description = "(Optional) The external IP address ranges allowed to access the Azure resources."
-  type        = list(string)
-  default     = []
 }
 
 variable "allowed_public_ip_addresses" {

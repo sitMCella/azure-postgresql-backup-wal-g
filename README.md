@@ -10,7 +10,7 @@
 
 ## Introduction
 
-The following project use WAL-G to take backups of an Azure Database for PostgreSQL – Flexible Server instance.
+The following project use WAL-G to take backups of an Azure Database for PostgreSQL Flexible Server instance.
 
 ## Requirements
 
@@ -27,7 +27,6 @@ Assign the RBAC roles "Contributor", "User Access Administrator" to the User acc
 Create the file `terraform.tfvars` and provide the values for the following Terraform variables:
 
 ```sh
-subscription_id="<subscription_id>"
 location="<azure_region>" # e.g. "westeurope"
 location_abbreviation="<azure_region_abbreviation>" # e.g. "weu"
 environment="<environment_name>" # e.g. "test"
@@ -36,7 +35,6 @@ postgresql_administrator_login="<postgresql_administrator_name>"
 postgresql_administrator_password="<postgresql_administrator_password>"
 vm_admin_username="<virtual_machine_administrator_name>"
 vm_admin_password="<virtual_machine_administrator_password>"
-allowed_public_ip_address_ranges=[<list_of_allowed_ip_address_ranges>] # Public IP Address ranges allowed to access the Azure resources e.g. "1.2.3.4/32"
 allowed_public_ip_addresses=<[<list_of_allowed_ip_addresses>] # Public IP Addresses allowed to access the Azure resources  e.g. "1.2.3.4"
 ```
 
@@ -76,15 +74,15 @@ cat /var/log/cloud-init-output.log
 
 ## PostgreSQL Replication
 
-The Azure Database for PostgreSQL Flexible Server resources support the logical replication for the databases using the PostgreSQL native logical replication: https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-logical.
+Azure Database for PostgreSQL Flexible Server supports logical replication using PostgreSQL's native replication capabilities: https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-logical.
 
-The PostgreSQL native logical replication does not replicate schema changes (DDL), so these changes must be applied manually on the target PostgreSQL database.
+PostgreSQL's native logical replication does not replicate schema changes (DDL), so any such changes must be applied manually on the target database.
 
-This section describes the configurations to apply in order to allow the database replication.
+This section describes the configuration steps required to enable database replication.
 
 ### Azure Database for PostgreSQL Flexible Server
 
-Create data in the PostgreSQL database "database1":
+Create a table and add data in the PostgreSQL database "database1":
 
 ```sh
 CREATE TABLE public.table1(id INT PRIMARY KEY, name VARCHAR(255) NOT NULL, type VARCHAR(255));
@@ -112,7 +110,7 @@ GRANT azure_pg_admin TO replicator;
 ALTER ROLE replicator REPLICATION LOGIN;
 ```
 
-Create a publication on database1:
+Create a publication in the database "database1":
 
 ```sh
 CREATE PUBLICATION dbpub FOR ALL TABLES;
@@ -126,7 +124,7 @@ SELECT * FROM pg_stat_replication;
 
 ### PostgreSQL in Azure Virtual Machine
 
-Create the database and the table in PostgreSQL:
+SSH into the Azure Virtual Machine and create the database "database1" and the corresponding table in PostgreSQL:
 
 ```sh
 sudo -u postgres psql
