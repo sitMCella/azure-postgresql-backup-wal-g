@@ -1,0 +1,1 @@
+# azure-postgresql-backup-wal-g
