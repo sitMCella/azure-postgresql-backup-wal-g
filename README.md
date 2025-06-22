@@ -10,7 +10,7 @@
 
 ## Introduction
 
-The following projects uses WAL-G to take backups of one Azure Database for PostgreSQL Flexible Server.
+The following project use WAL-G to take backups of an Azure Database for PostgreSQL – Flexible Server instance.
 
 ## Requirements
 
@@ -24,7 +24,7 @@ The following projects uses WAL-G to take backups of one Azure Database for Post
 
 Assign the RBAC roles "Contributor", "User Access Administrator" to the User account on the Subscription level.
 
-Create the file terraform.tfvars and provide the values for the following Terraform variables:
+Create the file `terraform.tfvars` and provide the values for the following Terraform variables:
 
 ```sh
 subscription_id="<subscription_id>"
