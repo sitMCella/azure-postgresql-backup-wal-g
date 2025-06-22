@@ -1,8 +1,22 @@
 # Backup for Azure PostgreSQL Flexible Server using WAL-G
 
+## Table of contents
+
+* [Introduction](#introduction)
+* [Requirements](#requirements)
+* [Terraform](#terraform)
+* [PostgreSQL Replication](#postgresql-replication)
+* [WAL-G](#wal-g)
+
 ## Introduction
 
 The following projects uses WAL-G to take backups of one Azure Database for PostgreSQL Flexible Server.
+
+## Requirements
+
+- Terraform
+- Azure CLI
+- Psql client or PgAdmin
 
 ## Terraform
 
@@ -167,6 +181,8 @@ sudo -u postgres envdir /etc/wal-g.d/env wal-g backup-list
 ```
 
 ### PostgreSQL Restore
+
+The following commands can be used to restore the PostgreSQL database to the latest backup.
 
 ```sh
 cd /tmp
