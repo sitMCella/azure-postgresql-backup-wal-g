@@ -1,4 +1,4 @@
-# Backup for Azure PostgreSQL Flexible Server using WAL-G
+# Backup of Azure Database for PostgreSQL Flexible Server using WAL-G
 
 ## Table of contents
 
